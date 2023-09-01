@@ -31,7 +31,8 @@
     "node-http-interceptor": "^0.3.0",
     "path": "^0.12.7",
     "reedsolomon": "^1.0.0",
-    "util": "^0.12.5"
+    "util": "^0.12.5",
+    "web3": "^4.1.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"
