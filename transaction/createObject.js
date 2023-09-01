@@ -45,9 +45,6 @@ function createObject({
                     fileType,
                     expectCheckSums,
                     visibility
-                }, {
-                    signType: "authTypeV1",
-                    privateKey: privateKey,
                 })
 
                 console.debug(_createObject)

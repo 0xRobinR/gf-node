@@ -11,15 +11,16 @@ function getBucketApproval({
     return new Promise(async (resolve, reject) => {
         try {
             const createBucket = await gfClient.bucket.createBucket({
-                signType: "authTypeV1",
-                privateKey: privateKey,
                 creator: creator,
                 spInfo: {
                     primarySpAddress: spAddress,
                 },
                 bucketName: bucketName,
                 chargedReadQuota: "0",
-                visibility: visibility,
+                visibility: visibility
+            }, {
+                type: "ECDSA",
+                privateKey: privateKey,
             })
 
             const simulate = await createBucket.simulate({ denom: "BNB" })
@@ -45,8 +46,6 @@ function createBucket({
     return new Promise(async (resolve, reject) => {
         try {
             const createBucket = await gfClient.bucket.createBucket({
-                signType: "authTypeV1",
-                privateKey: privateKey,
                 creator: creator,
                 spInfo: {
                     primarySpAddress: spAddress,
@@ -54,6 +53,9 @@ function createBucket({
                 bucketName: bucketName,
                 chargedReadQuota: "0",
                 visibility: visibility,
+            }, {
+                type: "ECDSA",
+                privateKey: privateKey,
             })
 
             const simulate = await createBucket.simulate({ denom: "BNB" })

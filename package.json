@@ -2,12 +2,13 @@
   "name": "gf-node-dart",
   "version": "0.0.1",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "dependencies": {
-    "@bnb-chain/greenfield-chain-sdk": "0.2.2",
     "@bnb-chain/greenfield-cosmos-types": "0.4.0-alpha.18",
-    "@bnb-chain/greenfiled-file-handle": "0.2.1-alpha.0",
+    "@bnb-chain/greenfield-js-sdk": "0.2.4",
+    "@bnb-chain/greenfiled-file-handle": "0.2.1",
     "@cosmjs/proto-signing": "^0.31.1",
     "@ethersproject/bytes": "^5.7.0",
     "@ethersproject/signing-key": "^5.7.0",
@@ -26,6 +27,7 @@
     "keccak": "^3.0.3",
     "long": "^5.2.3",
     "multer": "1.4.5-lts.1",
+    "node-fetch": "^3.3.2",
     "node-http-interceptor": "^0.3.0",
     "path": "^0.12.7",
     "reedsolomon": "^1.0.0",

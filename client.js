@@ -1,7 +1,12 @@
-const { Client } = require("@bnb-chain/greenfield-chain-sdk");
+const { Client } = require("@bnb-chain/greenfield-js-sdk");
 const { gfRPC } = require("./config");
 
-const client = Client.create('https://gnfd-testnet-fullnode-tendermint-ap.bnbchain.org', '5600');
+(async () => {
+    const fetch = await import('node-fetch');
+    global.fetch = fetch.default;
+})();
+
+const client = Client.create('https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org', '5600');
 
 module.exports = {
     gfClient: client

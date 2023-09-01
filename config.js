@@ -8,7 +8,7 @@ const defaultConfig = {
 }
 
 module.exports = {
-    "gfRPC": "https://gnfd-testnet-fullnode-tendermint-ap.bnbchain.org",
+    "gfRPC": "https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org",
     "defaultCall": (override) => {
         return {
             ...defaultConfig,

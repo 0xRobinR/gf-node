@@ -8,7 +8,7 @@ function getTotalBuckets() {
     return new Promise(async (resolve, reject) => {
         try {
             let config = defaultCall({
-                url: `${gfRPC}/greenfield/storage/list_buckets?pagination.count_total=true`,
+                url: `${gfRPC}/greenfield/storage/list_buckets`,
             })
 
             const response = await axios(config)

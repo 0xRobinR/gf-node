@@ -13,6 +13,7 @@ function getAccountInfo(address) {
             const response = await axios(options);
             resolve(response.data)
         } catch (err) {
+            console.log(err)
             resolve(buildError({ message: err.message }))
         }
     })
