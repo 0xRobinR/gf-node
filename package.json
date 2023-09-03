@@ -32,7 +32,8 @@
     "path": "^0.12.7",
     "reedsolomon": "^1.0.0",
     "util": "^0.12.5",
-    "web3": "^1.9.0"
+    "web3": "^1.9.0",
+    "xml2js": "^0.6.2"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

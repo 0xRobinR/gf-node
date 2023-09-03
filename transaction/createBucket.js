@@ -50,9 +50,10 @@ function createBucket({
                 spInfo: {
                     primarySpAddress: spAddress,
                 },
+                paymentAddress: creator,
                 bucketName: bucketName,
                 chargedReadQuota: "0",
-                visibility: visibility,
+                visibility: visibility || "VISIBILITY_TYPE_PUBLIC_READ",
             }, {
                 type: "ECDSA",
                 privateKey: privateKey,
@@ -65,15 +66,15 @@ function createBucket({
                 gasPrice: simulate.gasPrice,
                 payer: creator,
                 privateKey: privateKey,
-                granter: ""
+                granter: "",
             })
-            console.debug(broadcast, broadcast.events)
 
             resolve({
                 hash: broadcast.transactionHash,
                 block: broadcast.height
             })
         } catch (err) {
+            console.debug("error", err.message)
             resolve(buildError({ message: err.message }))
         }
     })

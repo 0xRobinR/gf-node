@@ -136,7 +136,7 @@ app.post('/userBuckets', async (req, res) => {
         res.send(resp)
         return
     }
-    res.send(resp?.buckets)
+    res.send(resp?.GfSpGetUserBucketsResponse.Buckets)
 })
 
 // Bucket Info
@@ -179,12 +179,14 @@ app.post('/getCreateBucketEstimate', async (req, res) => {
 
 app.post('/createBucket', async (req, res) => {
     const { auth: privateKey, spAddr: spAddress, address: creator, bucketName, visibility } = req.body
+    console.debug(privateKey, spAddress, creator, bucketName, visibility)
+
     const resp = await createBucket({
         privateKey,
         spAddress,
         creator,
         bucketName,
-        visibility
+        visibility: null
     })
     if (resp.error) {
         res.send(resp)
