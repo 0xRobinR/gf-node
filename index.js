@@ -25,7 +25,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
-const upload = multer({ dest: "./temp/" });
+// const upload = multer({ dest: "./temp/" });
 
 app.get('/', (req, res) => {
     res.send({
@@ -196,37 +196,37 @@ app.post('/createBucket', async (req, res) => {
 })
 
 // upload file objects
-app.post('/createObject', upload.single('myFile'), async (req, res) => {
-    try {
-        const uploadedFile = req.file;
-        if (!uploadedFile) {
-            res.status(400).json({ error: 'No file uploaded' });
-            return;
-        }
+// app.post('/createObject', upload.single('myFile'), async (req, res) => {
+//     try {
+//         const uploadedFile = req.file;
+//         if (!uploadedFile) {
+//             res.status(400).json({ error: 'No file uploaded' });
+//             return;
+//         }
 
-        // Access other form data via req.body
-        const { auth: privateKey, address: creator, bucketName, visibility } = req.body;
-        const fileType = uploadedFile.mimetype;
+//         // Access other form data via req.body
+//         const { auth: privateKey, address: creator, bucketName, visibility } = req.body;
+//         const fileType = uploadedFile.mimetype;
 
-        const resp = await createObject({
-            privateKey,
-            objectName: uploadedFile.originalname,
-            creator,
-            bucketName,
-            visibility,
-            fileType,
-            path: uploadedFile.path
-        });
-        if (resp.error) {
-            res.send(resp);
-            return;
-        }
-        res.send(resp);
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-})
+//         const resp = await createObject({
+//             privateKey,
+//             objectName: uploadedFile.originalname,
+//             creator,
+//             bucketName,
+//             visibility,
+//             fileType,
+//             path: uploadedFile.path
+//         });
+//         if (resp.error) {
+//             res.send(resp);
+//             return;
+//         }
+//         res.send(resp);
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// })
 
 app.listen(process.env.PORT || 80, () => console.log("server started"))
 
