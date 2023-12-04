@@ -25,7 +25,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
-const upload = multer({ dest: "./temp/" });
+// const upload = multer({ dest: "./temp/" });
 
 app.get('/', (req, res) => {
     res.send({

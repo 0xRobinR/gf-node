@@ -18,7 +18,6 @@ function createObject({
 }) {
     return new Promise(async (resolve, reject) => {
         try {
-
             const fileData = await fs.promises.readFile(path);
             const fileArrayBuffer = readFileAsUint8Array(fileData);
             if (fileArrayBuffer) {
@@ -36,9 +35,9 @@ function createObject({
                 //     expectCheckSums,
                 // })
 
-                console.debug("createObject", bucketName, objectName, creator, visibility, fileType, contentLength, expectCheckSums)
-
                 let _createObject = await gfClient.object.createObject({
+                    signType: "authTypeV1",
+                    privateKey,
                     bucketName,
                     objectName,
                     creator,
@@ -46,16 +45,9 @@ function createObject({
                     fileType,
                     expectCheckSums,
                     visibility
-                }, {
-                    type: "ECDSA",
-                    privateKey: privateKey,
                 })
 
                 console.debug(_createObject)
-
-                // let _upload = await gfClient.object.uploadObject({
-
-                // })
 
                 const simulate = await _createObject.simulate({ denom: "BNB" })
                 console.log(simulate)
@@ -76,7 +68,6 @@ function createObject({
             }
         }
         catch (err) {
-            console.error(err)
             resolve(buildError({ message: err.message }))
         }
     })
