@@ -17,6 +17,7 @@ const { getPriceBySP } = require('./gf/getSPPrice')
 const { getStats } = require('./gf/getStats')
 const { getBucketApproval, createBucket } = require('./transaction/createBucket')
 const { createObject } = require('./transaction/createObject')
+const { ethers } = require('ethers')
 
 const app = express()
 
@@ -179,12 +180,14 @@ app.post('/getCreateBucketEstimate', async (req, res) => {
 
 app.post('/createBucket', async (req, res) => {
     const { auth: privateKey, spAddr: spAddress, address: creator, bucketName, visibility } = req.body
-    console.debug(privateKey, spAddress, creator, bucketName, visibility)
+
+    let checksumCreator = ethers.utils.getAddress(creator)
+    console.debug(privateKey, spAddress, checksumCreator, bucketName, visibility)
 
     const resp = await createBucket({
         privateKey,
         spAddress,
-        creator,
+        creator: checksumCreator,
         bucketName,
         visibility: null
     })

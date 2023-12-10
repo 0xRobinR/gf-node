@@ -6,7 +6,7 @@ const { gfRPC } = require("./config");
     global.fetch = fetch.default;
 })();
 
-const client = Client.create('https://gnfd-testnet-fullnode-tendermint-us.bnbchain.org', '5600');
+const client = Client.create('https://gnfd-testnet-fullnode-tendermint-ap.bnbchain.org', '5600');
 
 module.exports = {
     gfClient: client
