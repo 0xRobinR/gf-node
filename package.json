@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "@bnb-chain/greenfield-cosmos-types": "0.4.0-alpha.18",
-    "@bnb-chain/greenfield-js-sdk": "../greenfield-js-sdk/packages/js-sdk/",
+    "@bnb-chain/greenfield-js-sdk": "1.0.6",
     "@bnb-chain/greenfiled-file-handle": "1.0.2",
     "@cosmjs/proto-signing": "^0.31.1",
     "@ethersproject/bytes": "^5.7.0",
