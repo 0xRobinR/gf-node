@@ -73,6 +73,44 @@ function createObject({
     })
 }
 
+function createObjectApproval({
+    privateKey,
+    bucketName,
+    objectName,
+    creator,
+    visibility = "VISIBILITY_TYPE_PUBLIC_READ",
+    fileType,
+    redundancyType = 'REDUNDANCY_EC_TYPE',
+    contentLength,
+    expectCheckSums,
+}) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let createObjectEstimate = await gfClient.object.createObject({
+                creator,
+                contentLength,
+                fileType,
+                visibility,
+                expectCheckSums,
+                objectName,
+                bucketName,
+                redundancyType,
+            }, {
+                privateKey: privateKey,
+                type: "ECDSA"
+            })
+
+            const simulate = await createObjectEstimate.simulate({ denom: "BNB" })
+            console.log(simulate)
+
+        }
+        catch (err) {
+            resolve(buildError({ message: err.message }))
+        }
+    })
+}
+
 module.exports = {
-    createObject
+    createObject,
+    createObjectApproval
 }

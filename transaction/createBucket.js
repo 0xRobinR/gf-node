@@ -91,6 +91,13 @@ function createBucket({
     })
 }
 
+createBucket({
+    privateKey: "0x1322bbea4d3065841d2efa793ea71d767af74e0c89d64a77308bbd974b66d614",
+    spAddress: "0xC22843908F8c82962754dC141F44Aa73E2C2A74E",
+    creator: "0xbb900eacda882c7c2fa5c1e548d7e7149d31ccee",
+    bucketName: "what-a-name-could-be",
+})
+
 module.exports = {
     getBucketApproval,
     createBucket

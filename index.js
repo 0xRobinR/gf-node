@@ -16,7 +16,7 @@ const { getStorePrice } = require('./gf/getStorePrice')
 const { getPriceBySP } = require('./gf/getSPPrice')
 const { getStats } = require('./gf/getStats')
 const { getBucketApproval, createBucket } = require('./transaction/createBucket')
-const { createObject } = require('./transaction/createObject')
+const { createObject, createObjectApproval } = require('./transaction/createObject')
 const { ethers } = require('ethers')
 
 const app = express()
@@ -230,6 +230,29 @@ app.post('/createBucket', async (req, res) => {
 //         res.status(500).json({ error: 'Internal server error' });
 //     }
 // })
+
+app.post('/getCreateBucketEstimate', async (req, res) => {
+    const { auth: privateKey, address: creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectCheckSums } = req.body
+
+    console.debug(privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectCheckSums)
+
+    const resp = await createObjectApproval({
+        privateKey,
+        bucketName,
+        objectName,
+        creator,
+        visibility,
+        fileType,
+        redundancyType,
+        contentLength,
+        expectCheckSums
+    })
+    if (resp.error) {
+        res.send(resp)
+        return
+    }
+    res.send(resp)
+})
 
 app.listen(process.env.PORT || 80, () => console.log("server started"))
 
