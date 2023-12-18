@@ -162,21 +162,21 @@ app.post('/bucketObjects', async (req, res) => {
 })
 
 // transaction
-app.post('/getCreateBucketEstimate', async (req, res) => {
-    const { auth: privateKey, spAddr: spAddress, address: creator, bucketName, visibility } = req.body
-    const resp = await getBucketApproval({
-        privateKey,
-        spAddress,
-        creator,
-        bucketName,
-        visibility
-    })
-    if (resp.error) {
-        res.send(resp)
-        return
-    }
-    res.send(resp)
-})
+// app.post('/getCreateBucketEstimate', async (req, res) => {
+//     const { auth: privateKey, spAddr: spAddress, address: creator, bucketName, visibility } = req.body
+//     const resp = await getBucketApproval({
+//         privateKey,
+//         spAddress,
+//         creator,
+//         bucketName,
+//         visibility
+//     })
+//     if (resp.error) {
+//         res.send(resp)
+//         return
+//     }
+//     res.send(resp)
+// })
 
 app.post('/createBucket', async (req, res) => {
     const { auth: privateKey, spAddr: spAddress, address: creator, bucketName, visibility } = req.body
