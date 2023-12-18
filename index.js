@@ -234,6 +234,8 @@ app.post('/createBucket', async (req, res) => {
 app.post('/getCreateObjectEstimate', async (req, res) => {
     const { auth: privateKey, address: creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectCheckSums } = req.body
 
+    console.debug(req.body)
+
     console.debug(privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectCheckSums)
 
     const resp = await createObjectApproval({
