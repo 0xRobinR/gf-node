@@ -257,5 +257,6 @@ app.post('/getCreateObjectEstimate', async (req, res) => {
 })
 
 app.listen(process.env.PORT || 80, () => console.log("server started"))
+app.timeout = 600000;
 
 module.exports = app
