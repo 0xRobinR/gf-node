@@ -103,6 +103,10 @@ function createObjectApproval({
             const simulate = await createObjectEstimate.simulate({ denom: "BNB" })
             console.log(simulate)
 
+            resolve({
+                ...simulate
+            })
+
         }
         catch (err) {
             console.debug(err)
