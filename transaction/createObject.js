@@ -104,7 +104,8 @@ function createObjectApproval({
             console.log(simulate)
 
             resolve({
-                ...simulate
+                ...simulate,
+                gasLimit: simulate.gasLimit.toString(),
             })
 
         }
