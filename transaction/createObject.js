@@ -91,7 +91,7 @@ function createObjectApproval({
                 contentLength,
                 fileType,
                 visibility,
-                expectCheckSums,
+                expectCheckSums: JSON.parse(expectCheckSums),
                 objectName,
                 bucketName,
                 redundancyType,
@@ -105,10 +105,23 @@ function createObjectApproval({
 
         }
         catch (err) {
+            console.debug(err)
             resolve(buildError({ message: err.message }))
         }
     })
 }
+
+createObjectApproval({
+    privateKey: "0x1322bbea4d3065841d2efa793ea71d767af74e0c89d64a77308bbd974b66d614",
+    bucketName: "hgff",
+    objectName: "🥷.jpeg",
+    creator: "0xbb900Eacda882c7c2FA5C1e548D7E7149d31ccee",
+    visibility: "VISIBILITY_TYPE_PUBLIC_READ",
+    fileType: "image\/jpeg",
+    redundancyType: 'REDUNDANCY_EC_TYPE',
+    contentLength: 833630,
+    expectCheckSums: "[\"719wKYhbbYIK1\\\/+QzMLfSYwv5aqtl6Cr1AKLAGbsFH4=\",\"f7xZijNzoV1y7NQ137ErcaRJtZO9igXZXKpTN5OMDck=\",\"4UjCPROlkLrA2N+vHNMenh0uUoY2PojWUygw8rH0nfg=\",\"GmiX9F6D6SOZbeEySgzR61wA9Usnk9IrfNg53PVTUEY=\",\"yduKiP\\\/j9QX0rIK\\\/E86B116GB\\\/MreOWWfKrr5Hteuko=\",\"NtQqDdiTvT+9F5k4sdPg+ESIE1du2waiiP0q80ziwIE=\",\"B9K2k746hBm5iFiI4HxmlI\\\/eWF\\\/eHtYIIlok+b59We0=\"]",
+})
 
 module.exports = {
     createObject,
