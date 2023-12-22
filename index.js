@@ -216,6 +216,8 @@ app.post('/createObject', async (req, res) => {
             expectCheckSums: expectedChecksums
         });
 
+        console.debug(resp)
+
         res.send(resp);
     } catch (error) {
         console.error('Error:', error);

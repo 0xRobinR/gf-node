@@ -48,7 +48,7 @@ function createObject({
                 granter: ""
             })
 
-            console.log(broadcast)
+            console.log(broadcast.transactionHash)
 
             resolve({
                 hash: broadcast.transactionHash,
