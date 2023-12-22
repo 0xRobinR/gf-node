@@ -202,6 +202,8 @@ app.post('/createObject', async (req, res) => {
     try {
         const { auth: privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums } = req.body
 
+        console.debug(privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums)
+
         const resp = await createObject({
             privateKey,
             bucketName,
