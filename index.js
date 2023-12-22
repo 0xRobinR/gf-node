@@ -208,7 +208,7 @@ app.post('/createObject', async (req, res) => {
             privateKey,
             bucketName,
             objectName,
-            creator,
+            creator: ethers.utils.getAddress(creator),
             visibility,
             fileType,
             redundancyType,
