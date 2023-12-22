@@ -15,5 +15,10 @@
       "dest": "/index.js"
     }
   ],
+  "functions": {
+    "/*.js": {
+      "maxDuration": 120
+    }
+  },
   "env": {}
 }
