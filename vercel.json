@@ -16,7 +16,7 @@
     }
   ],
   "functions": {
-    "/index.js": {
+    "/(.*)": {
       "maxDuration": 120
     }
   },
