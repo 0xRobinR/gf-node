@@ -198,44 +198,31 @@ app.post('/createBucket', async (req, res) => {
     res.send(resp)
 })
 
-// upload file objects
-// app.post('/createObject', upload.single('myFile'), async (req, res) => {
-//     try {
-//         const uploadedFile = req.file;
-//         if (!uploadedFile) {
-//             res.status(400).json({ error: 'No file uploaded' });
-//             return;
-//         }
+app.post('/createObject', async (req, res) => {
+    try {
+        const { auth: privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums } = req.body
 
-//         // Access other form data via req.body
-//         const { auth: privateKey, address: creator, bucketName, visibility } = req.body;
-//         const fileType = uploadedFile.mimetype;
+        const resp = await createObject({
+            privateKey,
+            bucketName,
+            objectName,
+            creator,
+            visibility,
+            fileType,
+            redundancyType,
+            contentLength,
+            expectCheckSums: expectedChecksums
+        });
 
-//         const resp = await createObject({
-//             privateKey,
-//             objectName: uploadedFile.originalname,
-//             creator,
-//             bucketName,
-//             visibility,
-//             fileType,
-//             path: uploadedFile.path
-//         });
-//         if (resp.error) {
-//             res.send(resp);
-//             return;
-//         }
-//         res.send(resp);
-//     } catch (error) {
-//         console.error('Error:', error);
-//         res.status(500).json({ error: 'Internal server error' });
-//     }
-// })
+        res.send(resp);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+})
 
 app.post('/getCreateObjectEstimate', async (req, res) => {
     const { auth: privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums } = req.body
-
-    console.debug(req.body)
-
     console.debug(privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums)
 
     const resp = await createObjectApproval({
