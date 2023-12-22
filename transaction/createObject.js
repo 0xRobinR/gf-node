@@ -34,7 +34,7 @@ function createObject({
                 type: "ECDSA"
             })
 
-            console.debug(_createObject)
+            // console.debug(_createObject)
 
             const simulate = await _createObject.simulate({ denom: "BNB" })
             console.log(simulate)
@@ -47,6 +47,8 @@ function createObject({
                 privateKey: privateKey,
                 granter: ""
             })
+
+            console.log(broadcast)
 
             resolve({
                 hash: broadcast.transactionHash,
