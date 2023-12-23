@@ -104,7 +104,41 @@ function createObjectApproval({
     })
 }
 
+function createFolder({
+    privateKey,
+    bucketName,
+    objectName,
+    creator
+}) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let createObjectEstimate = await gfClient.object.createFolder({
+                creator,
+                objectName: objectName + "/",
+                bucketName,
+            }, {
+                privateKey: privateKey,
+                type: "ECDSA"
+            })
+
+            const simulate = await createObjectEstimate.simulate({ denom: "BNB" })
+            console.log(simulate)
+
+            resolve({
+                ...simulate,
+                gasLimit: simulate.gasLimit.toString(),
+            })
+
+        }
+        catch (err) {
+            console.debug(err)
+            resolve(buildError({ message: err.message }))
+        }
+    })
+}
+
 module.exports = {
     createObject,
-    createObjectApproval
+    createObjectApproval,
+    createFolder
 }

@@ -16,7 +16,7 @@ const { getStorePrice } = require('./gf/getStorePrice')
 const { getPriceBySP } = require('./gf/getSPPrice')
 const { getStats } = require('./gf/getStats')
 const { getBucketApproval, createBucket } = require('./transaction/createBucket')
-const { createObject, createObjectApproval } = require('./transaction/createObject')
+const { createObject, createObjectApproval, createFolder } = require('./transaction/createObject')
 const { ethers } = require('ethers')
 
 const app = express()
@@ -246,6 +246,29 @@ app.post('/getCreateObjectEstimate', async (req, res) => {
         return
     }
     res.send(resp)
+})
+
+app.post('/createFolder', async (req, res) => {
+    try {
+        req.setTimeout(600000)
+        const { auth: privateKey, creator, bucketName, objectName } = req.body
+
+        console.debug(privateKey, creator, bucketName, objectName)
+
+        const resp = await createFolder({
+            privateKey,
+            bucketName,
+            objectName,
+            creator: ethers.utils.getAddress(creator)
+        });
+
+        console.debug(resp)
+
+        res.send(resp);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
 })
 
 app.listen(process.env.PORT || 80, () => console.log("server started"))
