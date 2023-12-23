@@ -124,9 +124,20 @@ function createFolder({
             const simulate = await createObjectEstimate.simulate({ denom: "BNB" })
             console.log(simulate)
 
-            resolve({
-                ...simulate,
+            const broadcast = await createObjectEstimate.broadcast({
+                denom: "BNB",
                 gasLimit: simulate.gasLimit.toString(),
+                gasPrice: simulate.gasPrice,
+                payer: creator,
+                privateKey: privateKey,
+                granter: ""
+            })
+
+            console.log(broadcast.transactionHash)
+
+            resolve({
+                hash: broadcast.transactionHash,
+                block: broadcast.height
             })
 
         }
