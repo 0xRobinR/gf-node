@@ -18,6 +18,8 @@ const { getStats } = require('./gf/getStats')
 const { getBucketApproval, createBucket } = require('./transaction/createBucket')
 const { createObject, createObjectApproval, createFolder, uploadObject } = require('./transaction/createObject')
 const { ethers } = require('ethers')
+const { getObjectPreview } = require('./gf/object/getObject')
+const { deleteObject } = require('./gf/object/deleteObject')
 
 const app = express()
 
@@ -297,6 +299,31 @@ app.post('/uploadObject', upload.single('file'), async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 })
+
+app.post("/getObjectPreview", async (req, res) => {
+    const { auth: privateKey, bucketName, objectName } = req.body
+    console.debug(privateKey, bucketName, objectName)
+    const resp = await getObjectPreview({
+        privateKey,
+        bucketName,
+        objectName,
+    })
+    res.send(resp)
+})
+
+app.post("/deleteObject", async (req, res) => {
+    const { auth: privateKey, bucketName, objectName, creator } = req.body
+
+    const resp = await deleteObject({
+        privateKey,
+        bucketName,
+        objectName,
+        creator: ethers.utils.getAddress(creator)
+    })
+
+    res.send(resp)
+})
+
 
 app.listen(process.env.PORT || 80, () => console.log("server started"))
 module.exports = app
