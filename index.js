@@ -277,11 +277,11 @@ app.post('/uploadObject', upload.single('file'), async (req, res) => {
     try {
         req.setTimeout(600000)
         const { auth: privateKey, bucketName, objectName } = req.body
-        const { path } = req.file
+        const { buffer } = req.file
 
-        console.debug(privateKey, bucketName, objectName, path)
+        console.debug(privateKey, bucketName, objectName, buffer)
 
-        res.json({ path })
+        res.json({ buffer })
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal server error' });
