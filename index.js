@@ -26,7 +26,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors())
 
-// const upload = multer({ dest: "./temp/" });
+const upload = multer({ dest: "./public/" });
 
 app.get('/', (req, res) => {
     res.send({
@@ -265,6 +265,22 @@ app.post('/createFolder', async (req, res) => {
         console.debug(resp)
 
         res.send(resp);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+})
+
+// upload object
+app.post('/uploadObject', upload.single('file'), async (req, res) => {
+    try {
+        req.setTimeout(600000)
+        const { auth: privateKey, bucketName, objectName } = req.body
+        const { path } = req.file
+
+        console.debug(privateKey, bucketName, objectName, path)
+
+        res.json({ path })
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal server error' });
