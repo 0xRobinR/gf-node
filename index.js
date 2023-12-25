@@ -16,7 +16,7 @@ const { getStorePrice } = require('./gf/getStorePrice')
 const { getPriceBySP } = require('./gf/getSPPrice')
 const { getStats } = require('./gf/getStats')
 const { getBucketApproval, createBucket } = require('./transaction/createBucket')
-const { createObject, createObjectApproval, createFolder } = require('./transaction/createObject')
+const { createObject, createObjectApproval, createFolder, uploadObject } = require('./transaction/createObject')
 const { ethers } = require('ethers')
 
 const app = express()
@@ -276,12 +276,22 @@ app.post('/createFolder', async (req, res) => {
 app.post('/uploadObject', upload.single('file'), async (req, res) => {
     try {
         req.setTimeout(600000)
-        const { auth: privateKey, bucketName, objectName } = req.body
+        const { auth: privateKey, bucketName, objectName, txHash } = req.body
         const { buffer } = req.file
 
-        console.debug(privateKey, bucketName, objectName, buffer)
+        console.debug(privateKey, bucketName, objectName, txHash)
 
-        res.json({ buffer })
+        const resp = await uploadObject({
+            privateKey,
+            bucketName,
+            objectName,
+            buffer,
+            txHash
+        });
+
+        console.debug(resp)
+
+        res.send(resp);
     } catch (error) {
         console.error('Error:', error);
         res.status(500).json({ error: 'Internal server error' });

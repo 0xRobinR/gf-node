@@ -3,8 +3,8 @@ const { buildError } = require("../utils/error");
 const { gfClient } = require("../client");
 
 function readFileAsUint8Array(fileData) {
-    const fileArrayBuffer = Buffer.from(fileData).buffer;
-    const fileUint8Array = new Uint8Array(fileArrayBuffer);
+    // const fileArrayBuffer = Buffer.from(fileData).buffer;
+    const fileUint8Array = new Uint8Array(fileData);
     return fileUint8Array;
 }
 function createObject({
@@ -148,8 +148,48 @@ function createFolder({
     })
 }
 
+function uploadObject({
+    privateKey,
+    bucketName,
+    objectName,
+    buffer,
+    txHash
+}) {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let uploadRes = await gfClient.object.uploadObject({
+                objectName,
+                bucketName,
+                body: readFileAsUint8Array(buffer),
+                txnHash: txHash
+            }, {
+                privateKey: privateKey,
+                type: "ECDSA"
+            })
+
+            // console.debug(_createObject)
+
+            console.log('uploadRes', uploadRes);
+
+            if (uploadRes.code === 0) {
+                resolve({
+                    code: uploadRes.statusCode,
+                    message: uploadRes.message
+                })
+            }
+            else {
+                resolve(buildError({ message: uploadRes.message }))
+            }
+        }
+        catch (err) {
+            resolve(buildError({ message: err.message }))
+        }
+    })
+}
+
 module.exports = {
     createObject,
     createObjectApproval,
-    createFolder
+    createFolder,
+    uploadObject
 }
