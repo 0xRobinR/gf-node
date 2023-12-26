@@ -18,10 +18,14 @@ function deleteObject({
                 operator: creator
             })
 
+            console.debug(preview)
+
+            const simulate = await preview.simulate({ denom: "BNB" })
+
             const broadcast = await preview.broadcast({
                 denom: "BNB",
-                gasLimit: preview.gasLimit.toString(),
-                gasPrice: preview.gasPrice,
+                gasLimit: simulate.gasLimit.toString(),
+                gasPrice: simulate.gasPrice,
                 payer: creator,
                 privateKey: privateKey,
                 granter: ""
