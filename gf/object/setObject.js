@@ -18,7 +18,7 @@ function setObject({
                 operator: creator,
                 bucketName,
                 objectName,
-                visibility
+                visibility: visibility === "VISIBILITY_TYPE_PUBLIC_READ" ? 1 : 0
             })
             const simulate = await preview.simulate({ denom: "BNB" })
 
