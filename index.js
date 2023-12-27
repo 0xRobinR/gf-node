@@ -19,7 +19,7 @@ const { getBucketApproval, createBucket } = require('./transaction/createBucket'
 const { createObject, createObjectApproval, createFolder, uploadObject } = require('./transaction/createObject')
 const { ethers } = require('ethers')
 const { getObjectPreview } = require('./gf/object/getObject')
-const { deleteObject } = require('./gf/object/deleteObject')
+const { deleteObject, cancelObject } = require('./gf/object/deleteObject')
 
 const app = express()
 
@@ -323,6 +323,20 @@ app.post("/deleteObject", async (req, res) => {
 
     res.send(resp)
 })
+
+app.post("/cancelObject", async (req, res) => {
+    const { auth: privateKey, bucketName, objectName, creator } = req.body
+
+    const resp = await cancelObject({
+        privateKey,
+        bucketName,
+        objectName,
+        creator: ethers.utils.getAddress(creator)
+    })
+
+    res.send(resp)
+})
+
 
 
 app.listen(process.env.PORT || 80, () => console.log("server started"))
