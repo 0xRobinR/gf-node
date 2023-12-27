@@ -1,7 +1,7 @@
 
 const { buildError } = require("../../utils/error");
 const { gfClient } = require("../../client");
-const { ethers } = require("ethers");
+const { VisibilityType } = require("@bnb-chain/greenfield-cosmos-types/greenfield/storage/common")
 
 function setObject({
     privateKey,
@@ -18,7 +18,7 @@ function setObject({
                 operator: creator,
                 bucketName,
                 objectName,
-                visibility: visibility === "VISIBILITY_TYPE_PUBLIC_READ" ? 1 : 0
+                visibility: visibility === "VISIBILITY_TYPE_PUBLIC_READ" ? VisibilityType.VISIBILITY_TYPE_PUBLIC_READ : VisibilityType.VISIBILITY_TYPE_PRIVATE
             })
             const simulate = await preview.simulate({ denom: "BNB" })
 
