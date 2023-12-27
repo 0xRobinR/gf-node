@@ -341,6 +341,8 @@ app.post("/cancelObject", async (req, res) => {
 app.post("/updateObject", async (req, res) => {
     const { auth: privateKey, bucketName, objectName, creator, visibility } = req.body
 
+    console.debug(privateKey, bucketName, objectName, creator, visibility)
+
     const resp = await setObject({
         privateKey,
         bucketName,
