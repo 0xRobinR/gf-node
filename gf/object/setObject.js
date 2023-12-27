@@ -12,6 +12,8 @@ function setObject({
 }) {
     return new Promise(async (resolve, reject) => {
         try {
+
+            console.log(visibility)
             let preview = await gfClient.object.updateObjectInfo({
                 operator: creator,
                 bucketName,
@@ -36,6 +38,7 @@ function setObject({
                 block: broadcast.height
             })
         } catch (err) {
+            console.debug("error", err.message)
             resolve(buildError({ message: err.message }))
         }
     })
