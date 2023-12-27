@@ -8,7 +8,7 @@ function setObject({
     creator,
     bucketName,
     objectName,
-    visibility
+    visibility = "VISIBILITY_TYPE_PUBLIC_READ"
 }) {
     return new Promise(async (resolve, reject) => {
         try {
@@ -16,7 +16,7 @@ function setObject({
                 operator: creator,
                 bucketName,
                 objectName,
-                visibility,
+                visibility
             })
             const simulate = await preview.simulate({ denom: "BNB" })
 
