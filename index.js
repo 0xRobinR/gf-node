@@ -20,6 +20,7 @@ const { createObject, createObjectApproval, createFolder, uploadObject } = requi
 const { ethers } = require('ethers')
 const { getObjectPreview } = require('./gf/object/getObject')
 const { deleteObject, cancelObject } = require('./gf/object/deleteObject')
+const { setObject } = require('./gf/object/setObject')
 
 const app = express()
 
@@ -332,6 +333,20 @@ app.post("/cancelObject", async (req, res) => {
         bucketName,
         objectName,
         creator: ethers.utils.getAddress(creator)
+    })
+
+    res.send(resp)
+})
+
+app.post("/cancelObject", async (req, res) => {
+    const { auth: privateKey, bucketName, objectName, creator, visibility } = req.body
+
+    const resp = await setObject({
+        privateKey,
+        bucketName,
+        objectName,
+        creator: ethers.utils.getAddress(creator),
+        visibility
     })
 
     res.send(resp)
