@@ -166,193 +166,193 @@ app.post('/bucketObjects', async (req, res) => {
 })
 
 // transaction
-app.post('/getCreateBucketEstimate', async (req, res) => {
-    const { auth: privateKey, spAddr: spAddress, address: creator, bucketName, visibility } = req.body
-    const resp = await getBucketApproval({
-        privateKey,
-        spAddress,
-        creator,
-        bucketName,
-        visibility
-    })
-    if (resp.error) {
-        res.send(resp)
-        return
-    }
-    res.send(resp)
-})
+// app.post('/getCreateBucketEstimate', async (req, res) => {
+//     const { auth: privateKey, spAddr: spAddress, address: creator, bucketName, visibility } = req.body
+//     const resp = await getBucketApproval({
+//         privateKey,
+//         spAddress,
+//         creator,
+//         bucketName,
+//         visibility
+//     })
+//     if (resp.error) {
+//         res.send(resp)
+//         return
+//     }
+//     res.send(resp)
+// })
 
-app.post('/createBucket', async (req, res) => {
-    const { auth: privateKey, spAddr: spAddress, address: creator, bucketName, visibility } = req.body
+// app.post('/createBucket', async (req, res) => {
+//     const { auth: privateKey, spAddr: spAddress, address: creator, bucketName, visibility } = req.body
 
-    let checksumCreator = ethers.utils.getAddress(creator)
-    console.debug(privateKey, spAddress, checksumCreator, bucketName, visibility)
+//     let checksumCreator = ethers.utils.getAddress(creator)
+//     console.debug(privateKey, spAddress, checksumCreator, bucketName, visibility)
 
-    const resp = await createBucket({
-        privateKey,
-        spAddress,
-        creator: checksumCreator,
-        bucketName,
-        visibility: null
-    })
-    if (resp.error) {
-        res.send(resp)
-        return
-    }
-    res.send(resp)
-})
+//     const resp = await createBucket({
+//         privateKey,
+//         spAddress,
+//         creator: checksumCreator,
+//         bucketName,
+//         visibility: null
+//     })
+//     if (resp.error) {
+//         res.send(resp)
+//         return
+//     }
+//     res.send(resp)
+// })
 
-app.post('/createObject', async (req, res) => {
-    try {
-        req.setTimeout(600000)
-        const { auth: privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums } = req.body
+// app.post('/createObject', async (req, res) => {
+//     try {
+//         req.setTimeout(600000)
+//         const { auth: privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums } = req.body
 
-        console.debug(privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums)
+//         console.debug(privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums)
 
-        const resp = await createObject({
-            privateKey,
-            bucketName,
-            objectName,
-            creator: ethers.utils.getAddress(creator),
-            visibility,
-            fileType,
-            redundancyType,
-            contentLength,
-            expectCheckSums: expectedChecksums
-        });
+//         const resp = await createObject({
+//             privateKey,
+//             bucketName,
+//             objectName,
+//             creator: ethers.utils.getAddress(creator),
+//             visibility,
+//             fileType,
+//             redundancyType,
+//             contentLength,
+//             expectCheckSums: expectedChecksums
+//         });
 
-        console.debug(resp)
+//         console.debug(resp)
 
-        res.send(resp);
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-})
+//         res.send(resp);
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// })
 
-app.post('/getCreateObjectEstimate', async (req, res) => {
-    const { auth: privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums } = req.body
-    console.debug(privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums)
+// app.post('/getCreateObjectEstimate', async (req, res) => {
+//     const { auth: privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums } = req.body
+//     console.debug(privateKey, creator, bucketName, visibility, objectName, redundancyType, fileType, contentLength, expectedChecksums)
 
-    const resp = await createObjectApproval({
-        privateKey,
-        bucketName,
-        objectName,
-        creator,
-        visibility,
-        fileType,
-        redundancyType,
-        contentLength,
-        expectCheckSums: expectedChecksums
-    })
-    if (resp.error) {
-        res.send(resp)
-        return
-    }
-    res.send(resp)
-})
+//     const resp = await createObjectApproval({
+//         privateKey,
+//         bucketName,
+//         objectName,
+//         creator,
+//         visibility,
+//         fileType,
+//         redundancyType,
+//         contentLength,
+//         expectCheckSums: expectedChecksums
+//     })
+//     if (resp.error) {
+//         res.send(resp)
+//         return
+//     }
+//     res.send(resp)
+// })
 
-app.post('/createFolder', async (req, res) => {
-    try {
-        req.setTimeout(600000)
-        const { auth: privateKey, creator, bucketName, objectName } = req.body
+// app.post('/createFolder', async (req, res) => {
+//     try {
+//         req.setTimeout(600000)
+//         const { auth: privateKey, creator, bucketName, objectName } = req.body
 
-        console.debug(privateKey, creator, bucketName, objectName)
+//         console.debug(privateKey, creator, bucketName, objectName)
 
-        const resp = await createFolder({
-            privateKey,
-            bucketName,
-            objectName,
-            creator: ethers.utils.getAddress(creator)
-        });
+//         const resp = await createFolder({
+//             privateKey,
+//             bucketName,
+//             objectName,
+//             creator: ethers.utils.getAddress(creator)
+//         });
 
-        console.debug(resp)
+//         console.debug(resp)
 
-        res.send(resp);
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-})
+//         res.send(resp);
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// })
 
-// upload object
-app.post('/uploadObject', upload.single('file'), async (req, res) => {
-    try {
-        req.setTimeout(600000)
-        const { auth: privateKey, bucketName, objectName, txHash } = req.body
-        const { buffer } = req.file
+// // upload object
+// app.post('/uploadObject', upload.single('file'), async (req, res) => {
+//     try {
+//         req.setTimeout(600000)
+//         const { auth: privateKey, bucketName, objectName, txHash } = req.body
+//         const { buffer } = req.file
 
-        console.debug(privateKey, bucketName, objectName, txHash)
+//         console.debug(privateKey, bucketName, objectName, txHash)
 
-        const resp = await uploadObject({
-            privateKey,
-            bucketName,
-            objectName,
-            buffer,
-            txHash
-        });
+//         const resp = await uploadObject({
+//             privateKey,
+//             bucketName,
+//             objectName,
+//             buffer,
+//             txHash
+//         });
 
-        console.debug(resp)
+//         console.debug(resp)
 
-        res.send(resp);
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    }
-})
+//         res.send(resp);
+//     } catch (error) {
+//         console.error('Error:', error);
+//         res.status(500).json({ error: 'Internal server error' });
+//     }
+// })
 
-app.post("/getObjectPreview", async (req, res) => {
-    const { auth: privateKey, bucketName, objectName } = req.body
-    console.debug(privateKey, bucketName, objectName)
-    const resp = await getObjectPreview({
-        privateKey,
-        bucketName,
-        objectName,
-    })
-    res.send(resp)
-})
+// app.post("/getObjectPreview", async (req, res) => {
+//     const { auth: privateKey, bucketName, objectName } = req.body
+//     console.debug(privateKey, bucketName, objectName)
+//     const resp = await getObjectPreview({
+//         privateKey,
+//         bucketName,
+//         objectName,
+//     })
+//     res.send(resp)
+// })
 
-app.post("/deleteObject", async (req, res) => {
-    const { auth: privateKey, bucketName, objectName, creator } = req.body
+// app.post("/deleteObject", async (req, res) => {
+//     const { auth: privateKey, bucketName, objectName, creator } = req.body
 
-    const resp = await deleteObject({
-        privateKey,
-        bucketName,
-        objectName,
-        creator: ethers.utils.getAddress(creator)
-    })
+//     const resp = await deleteObject({
+//         privateKey,
+//         bucketName,
+//         objectName,
+//         creator: ethers.utils.getAddress(creator)
+//     })
 
-    res.send(resp)
-})
+//     res.send(resp)
+// })
 
-app.post("/cancelObject", async (req, res) => {
-    const { auth: privateKey, bucketName, objectName, creator } = req.body
+// app.post("/cancelObject", async (req, res) => {
+//     const { auth: privateKey, bucketName, objectName, creator } = req.body
 
-    const resp = await cancelObject({
-        privateKey,
-        bucketName,
-        objectName,
-        creator: ethers.utils.getAddress(creator)
-    })
+//     const resp = await cancelObject({
+//         privateKey,
+//         bucketName,
+//         objectName,
+//         creator: ethers.utils.getAddress(creator)
+//     })
 
-    res.send(resp)
-})
+//     res.send(resp)
+// })
 
-app.post("/updateObject", async (req, res) => {
-    const { auth: privateKey, bucketName, objectName, creator, visibility } = req.body
+// app.post("/updateObject", async (req, res) => {
+//     const { auth: privateKey, bucketName, objectName, creator, visibility } = req.body
 
-    console.debug(privateKey, bucketName, objectName, creator, visibility)
+//     console.debug(privateKey, bucketName, objectName, creator, visibility)
 
-    const resp = await setObject({
-        privateKey,
-        bucketName,
-        objectName,
-        creator: ethers.utils.getAddress(creator),
-        visibility
-    })
+//     const resp = await setObject({
+//         privateKey,
+//         bucketName,
+//         objectName,
+//         creator: ethers.utils.getAddress(creator),
+//         visibility
+//     })
 
-    res.send(resp)
-})
+//     res.send(resp)
+// })
 
 
 
