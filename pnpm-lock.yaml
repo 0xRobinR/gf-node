@@ -9,8 +9,8 @@ dependencies:
     specifier: 0.4.0-alpha.18
     version: 0.4.0-alpha.18
   '@bnb-chain/greenfield-js-sdk':
-    specifier: 1.0.6
-    version: 1.0.6
+    specifier: 1.2.0
+    version: 1.2.0
   '@bnb-chain/greenfiled-file-handle':
     specifier: 1.0.2
     version: 1.0.2
@@ -104,18 +104,17 @@ packages:
       protobufjs: 6.11.4
     dev: false
 
-  /@bnb-chain/greenfield-cosmos-types@0.4.0-alpha.23:
-    resolution: {integrity: sha512-VAuk5CxTSbiOa8HvlEY/uf8zoTvgyRvQMwQs0S/7wjoloE0I7hSZXWPUEeFmypB1xZuggDtyCfizS2faL/NKeg==}
+  /@bnb-chain/greenfield-cosmos-types@0.4.0-alpha.30:
+    resolution: {integrity: sha512-nYThWPZHfq/bDMEu+Sw9cMMqgTk4NEg+PH9GkvN2OMgpo8QuCDy3Eh4C1g6lJy0BFv+ilethoPmKjSeEwa1m8g==}
     dependencies:
       long: 4.0.0
       protobufjs: 6.11.4
     dev: false
 
-  /@bnb-chain/greenfield-js-sdk@1.0.6:
-    resolution: {integrity: sha512-DaRm8ascPrqAgi2eqeOx6cfF60vlbW8dUwfTASiLMNz6vpTuo0W+jGMlN++yucpERREmR7RGYkXKIu1q9YVmyw==}
-    engines: {npm: please use pnpm, yarn: please use pnpm}
+  /@bnb-chain/greenfield-js-sdk@1.2.0:
+    resolution: {integrity: sha512-xYYK+4WXGiqX7MBNqRij2zo/3HI3mMwtuUOQS3qOoWkHG6oWUAKeBPxUNKz6RuPigZYAckAH0XcrJT0kjJIB+g==}
     dependencies:
-      '@bnb-chain/greenfield-cosmos-types': 0.4.0-alpha.23
+      '@bnb-chain/greenfield-cosmos-types': 0.4.0-alpha.30
       '@bnb-chain/greenfield-zk-crypto': 1.0.0
       '@cosmjs/proto-signing': 0.32.1
       '@cosmjs/stargate': 0.32.1
@@ -128,7 +127,6 @@ packages:
       '@metamask/eth-sig-util': 5.1.0
       cross-fetch: 3.1.8
       dayjs: 1.11.10
-      dotenv: 16.3.1
       ethereum-cryptography: 2.1.2
       fast-xml-parser: 4.3.2
       lodash.clonedeep: 4.5.0
@@ -1447,7 +1445,7 @@ packages:
     resolution: {integrity: sha512-E7uGkTzkk1d0ByLeSc6ZsFS79Axg+m1P/VsgYsxHgiuc3tFSj+MjMIwe90FC4lOAZzNBdY7kkO2P2wKdsQ1vgQ==}
     engines: {node: '>= 0.4'}
     dependencies:
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
       gopd: 1.0.1
       has-property-descriptors: 1.0.1
     dev: false
@@ -1485,11 +1483,6 @@ packages:
     engines: {node: '>=12'}
     dependencies:
       webidl-conversions: 7.0.0
-    dev: false
-
-  /dotenv@16.3.1:
-    resolution: {integrity: sha512-IPzF4w4/Rd94bA9imS68tZBaYyBWSCE47V1RGuMrB94iyTOIEwRmVL2x/4An+6mETpLrKJ5hQkB8W4kFAadeIQ==}
-    engines: {node: '>=12'}
     dev: false
 
   /ecc-jsbn@0.1.2:

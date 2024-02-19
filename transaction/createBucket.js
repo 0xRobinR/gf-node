@@ -2,9 +2,6 @@ const { ethers } = require("ethers")
 const { gfClient } = require("../client")
 const { buildError } = require("../utils/error")
 
-const wallet = new ethers.Wallet("0x1322bbea4d3065841d2efa793ea71d767af74e0c89d64a77308bbd974b66d614")
-const account = wallet.connect(gfClient.provider)
-
 // account.signMessage("hello world").then((signature) => {
 //     console.debug(signature)
 // })
@@ -90,13 +87,6 @@ function createBucket({
         }
     })
 }
-
-createBucket({
-    privateKey: "0x1322bbea4d3065841d2efa793ea71d767af74e0c89d64a77308bbd974b66d614",
-    spAddress: "0xC22843908F8c82962754dC141F44Aa73E2C2A74E",
-    creator: "0xbb900Eacda882c7c2FA5C1e548D7E7149d31Ccee",
-    bucketName: "what-a-name-could-be",
-})
 
 module.exports = {
     getBucketApproval,
